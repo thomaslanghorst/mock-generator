@@ -1,0 +1,3 @@
+bin
+*_mock.go
+.DS_Store

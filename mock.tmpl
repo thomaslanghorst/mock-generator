@@ -1,0 +1,20 @@
+package {{ .Package }}
+
+import "github.com/stretchr/testify/mock"
+
+type Mock{{ .Name }} struct {
+	mock.Mock
+}
+
+{{ range .FunctionDefinitions -}}
+func (m *Mock{{ $.Name }}) {{ .Name }}({{ .Params }}) {{ .ReturnValues }} {
+    {{ .CalledLine }}
+	{{ if ne (len .TypeCastingLines) 0 -}}
+    {{ range .TypeCastingLines }}
+	{{ . -}}
+	{{ end -}}
+	{{ end }}
+	{{ .ReturnLine }}
+}
+
+{{ end -}}
